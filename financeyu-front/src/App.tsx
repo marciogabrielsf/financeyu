@@ -16,53 +16,56 @@ import { Register } from "./pages/Register";
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { user, isLoading } = useAuth();
+    const { user, isLoading } = useAuth();
 
-  if (isLoading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
-  }
+    if (isLoading) {
+        return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    }
 
-  if (!user) {
-    return <Navigate to="/login" />;
-  }
+    if (!user) {
+        return <Navigate to="/login" />;
+    }
 
-  return <>{children}</>;
+    return <>{children}</>;
 };
 
 function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <AuthProvider>
-          <FinanceProvider>
-            <Router>
-              <Routes>
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route
-                  path="/*"
-                  element={
-                    <ProtectedRoute>
-                      <Layout>
+    return (
+        <QueryClientProvider client={queryClient}>
+            <ThemeProvider>
+                <AuthProvider>
+                    <Router>
                         <Routes>
-                          <Route path="/" element={<Dashboard />} />
-                          <Route path="/debtors" element={<Debtors />} />
-                          <Route path="/cards" element={<Cards />} />
-                          <Route path="/debts" element={<Debts />} />
-                          <Route path="/reports" element={<Reports />} />
-                          <Route path="/settings" element={<Settings />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/register" element={<Register />} />
+                            <Route
+                                path="/*"
+                                element={
+                                    <ProtectedRoute>
+                                        <FinanceProvider>
+                                            <Layout>
+                                                <Routes>
+                                                    <Route path="/" element={<Dashboard />} />
+                                                    <Route path="/debtors" element={<Debtors />} />
+                                                    <Route path="/cards" element={<Cards />} />
+                                                    <Route path="/debts" element={<Debts />} />
+                                                    <Route path="/reports" element={<Reports />} />
+                                                    <Route
+                                                        path="/settings"
+                                                        element={<Settings />}
+                                                    />
+                                                </Routes>
+                                            </Layout>
+                                        </FinanceProvider>
+                                    </ProtectedRoute>
+                                }
+                            />
                         </Routes>
-                      </Layout>
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-            </Router>
-          </FinanceProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
+                    </Router>
+                </AuthProvider>
+            </ThemeProvider>
+        </QueryClientProvider>
+    );
 }
 
 export default App;
