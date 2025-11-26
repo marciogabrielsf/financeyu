@@ -12,7 +12,6 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!);
-        // @ts-expect-error - adding user to request object
         req.user = decoded;
         next();
     } catch (_error) {

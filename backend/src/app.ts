@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
-import swaggerUi from "swagger-ui-express";
 import authRoutes from "./routes/authRoutes";
 import cardRoutes from "./routes/cardRoutes";
 import debtorRoutes from "./routes/debtorRoutes";
@@ -23,7 +22,9 @@ app.use("/debtors", debtorRoutes);
 app.use("/debts", debtRoutes);
 app.use("/dashboard", dashboardRoutes);
 
-// Swagger (Placeholder for now)
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(undefined));
+// Health check
+app.get("/health", (_req, res) => {
+    res.status(200).json({ status: "ok" });
+});
 
 export default app;
