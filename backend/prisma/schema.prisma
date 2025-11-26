@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  debts     Debt[]
+  debtors   Debtor[]
+  cards     Card[]
+}
+
+model Card {
+  id          String   @id @default(uuid())
+  name        String
+  color       String
+  dueDay      Int
+  lastDigits  String
+  expiryDate  String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  debts       Debt[]
+}
+
+model Debtor {
+  id        String   @id @default(uuid())
+  name      String
+  avatar    String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  debts     Debt[]
+}
+
+model Debt {
+  id          String   @id @default(uuid())
+  description String
+  amount      Float
+  date        DateTime
+  month       String   // e.g., "2023-01"
+  paid        Boolean  @default(false)
+  
+  // Installments logic
+  currentInstallment Int?
+  totalInstallments  Int?
+
+  cardId      String?
+  card        Card?    @relation(fields: [cardId], references: [id])
+  
+  debtorId    String?
+  debtor      Debtor?  @relation(fields: [debtorId], references: [id])
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
