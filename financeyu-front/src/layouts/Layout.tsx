@@ -57,7 +57,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     ];
 
     return (
-        <div className="h-screen bg-background text-foreground flex overflow-hidden bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-900/20 via-background to-background">
+        <div className="h-[100dvh] bg-background text-foreground flex overflow-hidden bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-900/20 via-background to-background">
             {/* Mobile Header */}
             <div className="md:hidden fixed top-0 left-0 right-0 h-16 bg-black/20 backdrop-blur-xl border-b border-white/10 z-50 flex items-center justify-between px-4">
                 <div className="flex items-center gap-2">

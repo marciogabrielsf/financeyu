@@ -504,64 +504,65 @@ export const Reports = () => {
                       ref={reportRef} 
                       style={{ 
                         backgroundColor: '#18181b', 
-                        padding: '2rem', 
+                        padding: '1.5rem', 
                         borderRadius: '0.75rem', 
-                        color: '#ffffff' 
+                        color: '#ffffff',
+                        minWidth: '500px'
                       }}
                     >
                         {/* Header */}
-                        <div style={{ textAlign: 'center', borderBottom: '1px solid #27272a', paddingBottom: '1.5rem', marginBottom: '2rem' }}>
-                            <h1 style={{ fontSize: '1.875rem', fontWeight: 'bold', letterSpacing: '-0.025em', marginBottom: '0.5rem', color: '#ffffff' }}>Relatório Financeiro</h1>
-                            <p style={{ color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.875rem' }}>
+                        <div style={{ textAlign: 'center', borderBottom: '1px solid #27272a', paddingBottom: '1rem', marginBottom: '1.5rem' }}>
+                            <h1 style={{ fontSize: '1.5rem', fontWeight: 'bold', letterSpacing: '-0.025em', marginBottom: '0.25rem', color: '#ffffff' }}>Relatório Financeiro</h1>
+                            <p style={{ color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.1em', fontSize: '0.75rem' }}>
                                 {format(currentMonth, "MMMM 'de' yyyy", { locale: ptBR })}
                             </p>
                         </div>
 
                         {/* Content */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             {reportData.map((data) => (
-                                <div key={data!.debtor.id} style={{ backgroundColor: '#27272a', borderRadius: '1rem', padding: '1.5rem', border: '1px solid #3f3f46' }}>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem', borderBottom: '1px solid #3f3f46', paddingBottom: '1rem' }}>
+                                <div key={data!.debtor.id} style={{ backgroundColor: '#27272a', borderRadius: '1rem', padding: '1rem', border: '1px solid #3f3f46' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1rem', borderBottom: '1px solid #3f3f46', paddingBottom: '0.75rem' }}>
                                         <div style={{ 
-                                          width: '3rem', 
-                                          height: '3rem', 
+                                          width: '2.5rem', 
+                                          height: '2.5rem', 
                                           borderRadius: '50%', 
                                           background: 'linear-gradient(to bottom right, #6366f1, #9333ea)', 
                                           display: 'flex', 
                                           alignItems: 'center', 
                                           justifyContent: 'center', 
-                                          fontSize: '1.25rem', 
+                                          fontSize: '1rem', 
                                           fontWeight: 'bold', 
                                           color: '#ffffff' 
                                         }}>
                                             {data!.debtor.name.charAt(0)}
                                         </div>
                                         <div>
-                                            <h3 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#ffffff', margin: 0 }}>{data!.debtor.name}</h3>
-                                            <p style={{ fontSize: '0.875rem', color: '#a1a1aa', margin: 0 }}>Total a pagar</p>
+                                            <h3 style={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#ffffff', margin: 0 }}>{data!.debtor.name}</h3>
+                                            <p style={{ fontSize: '0.75rem', color: '#a1a1aa', margin: 0 }}>Total a pagar</p>
                                         </div>
                                         <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
-                                            <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#fafafa', margin: 0 }}>R$ {data!.total.toFixed(2)}</p>
+                                            <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#fafafa', margin: 0 }}>R$ {data!.total.toFixed(2)}</p>
                                         </div>
                                     </div>
 
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                         {Object.values(data!.debtsByCard).map((group) => (
                                             <div key={group.name}>
-                                                <h4 style={{ fontSize: '0.875rem', fontWeight: 'bold', color: '#d4d4d8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                                    <CreditCard style={{ width: '1rem', height: '1rem' }} />
+                                                <h4 style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#d4d4d8', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                                    <CreditCard style={{ width: '0.875rem', height: '0.875rem' }} />
                                                     {group.name}
                                                 </h4>
-                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.375rem' }}>
                                                     {group.debts.map((debt, index) => (
-                                                        <div key={debt.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.875rem', padding: '0.5rem 0', borderBottom: index < group.debts.length - 1 ? '1px solid #3f3f46' : 'none' }}>
+                                                        <div key={debt.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '0.8rem', padding: '0.375rem 0', borderBottom: index < group.debts.length - 1 ? '1px solid #3f3f46' : 'none' }}>
                                                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                                                 <span style={{ fontWeight: '500', color: '#f4f4f5' }}>{debt.description}</span>
-                                                                <span style={{ fontSize: '0.75rem', color: '#a1a1aa' }}>{format(new Date(debt.date), "dd/MM/yyyy")}</span>
+                                                                <span style={{ fontSize: '0.7rem', color: '#a1a1aa' }}>{format(new Date(debt.date), "dd/MM/yyyy")}</span>
                                                             </div>
-                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                                                                 {debt.installments && (
-                                                                    <span style={{ fontSize: '0.75rem', backgroundColor: '#3f3f46', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', color: '#d4d4d8' }}>
+                                                                    <span style={{ fontSize: '0.7rem', backgroundColor: '#3f3f46', padding: '0.125rem 0.375rem', borderRadius: '0.25rem', color: '#d4d4d8' }}>
                                                                         {debt.installments.current}/{debt.installments.total}
                                                                     </span>
                                                                 )}
@@ -571,8 +572,8 @@ export const Reports = () => {
                                                     ))}
                                                 </div>
                                                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid #3f3f46' }}>
-                                                    <span style={{ fontSize: '0.75rem', color: '#a1a1aa', marginRight: '0.5rem' }}>Subtotal:</span>
-                                                    <span style={{ fontSize: '0.875rem', fontWeight: 'bold', color: '#ffffff' }}>R$ {group.total.toFixed(2)}</span>
+                                                    <span style={{ fontSize: '0.7rem', color: '#a1a1aa', marginRight: '0.5rem' }}>Subtotal:</span>
+                                                    <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: '#ffffff' }}>R$ {group.total.toFixed(2)}</span>
                                                 </div>
                                             </div>
                                         ))}
@@ -582,14 +583,14 @@ export const Reports = () => {
                         </div>
 
                         {/* Footer */}
-                        <div style={{ borderTop: '1px solid #27272a', paddingTop: '1.5rem', marginTop: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div style={{ fontSize: '0.875rem', color: '#a1a1aa' }}>
+                        <div style={{ borderTop: '1px solid #27272a', paddingTop: '1rem', marginTop: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <div style={{ fontSize: '0.75rem', color: '#a1a1aa' }}>
                                 <p style={{ margin: 0 }}>Gerado via FinanceYu</p>
                                 <p style={{ margin: 0 }}>{format(new Date(), "dd/MM/yyyy HH:mm")}</p>
                             </div>
                             <div style={{ textAlign: 'right' }}>
-                                <p style={{ fontSize: '0.875rem', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.25rem' }}>Total Geral</p>
-                                <p style={{ fontSize: '2.25rem', fontWeight: 'bold', color: '#ffffff', margin: 0 }}>R$ {grandTotal.toFixed(2)}</p>
+                                <p style={{ fontSize: '0.75rem', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '0.125rem' }}>Total Geral</p>
+                                <p style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#ffffff', margin: 0 }}>R$ {grandTotal.toFixed(2)}</p>
                             </div>
                         </div>
                     </div>
