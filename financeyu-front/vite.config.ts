@@ -13,6 +13,9 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    preview: {
+        allowedHosts: ["financeyu-financeyu-front.tghv0u.easypanel.host"],
+    },
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
