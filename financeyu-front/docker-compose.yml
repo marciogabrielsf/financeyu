@@ -1,0 +1,9 @@
+services:
+  financeyu-front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: financeyu-front
+    ports:
+      - "4173:4173"
+    restart: unless-stopped
