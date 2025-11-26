@@ -2,6 +2,10 @@ FROM node:20-alpine
 
 WORKDIR /app
 
+# Build argument para a URL da API
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+
 # Copiar arquivos de dependências
 COPY package.json yarn.lock* package-lock.json* ./
 
@@ -13,7 +17,7 @@ RUN if [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
 # Copiar código fonte
 COPY . .
 
-# Build da aplicação
+# Build da aplicação (as variáveis VITE_* são injetadas aqui)
 RUN if [ -f yarn.lock ]; then yarn build; else npm run build; fi
 
 # Expor porta padrão do Vite preview
