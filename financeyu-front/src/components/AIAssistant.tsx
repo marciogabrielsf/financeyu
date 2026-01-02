@@ -34,7 +34,7 @@ export const AIAssistant = () => {
     const scrollRef = useRef<HTMLDivElement>(null);
 
     const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-        api: "http://localhost:3000/ai/chat",
+        api: `${import.meta.env.VITE_API_URL}/ai/chat`,
         headers: {
             Authorization: `Bearer ${token}`,
         },
